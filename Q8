@@ -1,0 +1,20 @@
+import pandas as pd
+
+sales_data = pd.DataFrame({
+    "Product": [
+        "Laptop", "Mouse", "Keyboard", "Laptop",
+        "Mouse", "Monitor", "Laptop", "Keyboard",
+        "Mouse", "Headphones", "Monitor", "Laptop"
+    ],
+    "Quantity": [
+        5, 20, 15, 8, 25, 10,
+        7, 12, 18, 9, 14, 6
+    ]
+})
+
+product_sales = sales_data.groupby("Product")["Quantity"].sum()
+
+top_5 = product_sales.sort_values(ascending=False).head(5)
+
+print("Top 5 products sold:")
+print(top_5)
