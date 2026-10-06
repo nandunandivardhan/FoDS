@@ -1,0 +1,20 @@
+import matplotlib.pyplot as plt
+
+months = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+]
+
+sales = [
+    100, 120, 150, 130, 180, 200,
+    170, 190, 220, 210, 240, 260
+]
+
+plt.plot(months, sales, marker="o")
+
+plt.title("Monthly Sales")
+plt.xlabel("Month")
+plt.ylabel("Sales")
+plt.grid(True)
+
+plt.show()
