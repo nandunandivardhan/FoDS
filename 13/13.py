@@ -1,38 +1,38 @@
 
-import re
-from collections import Counter
+import pandas as pd
 from tkinter import Tk, filedialog
+from collections import Counter
+import re
 
-# Select a text file
 root = Tk()
 root.withdraw()
 
 file_path = filedialog.askopenfilename(
-    title="Select Text File",
-    filetypes=[("Text files", "*.txt")]
+    title="Select Question 13 Dataset",
+    filetypes=[("CSV files", "*.csv")]
 )
-
 root.destroy()
 
 if file_path:
-    # Read the text file
-    with open(file_path, "r", encoding="utf-8") as file:
-        text = file.read()
+    data = pd.read_csv(file_path)
+
+    # Combine text from all rows
+    all_text = " ".join(data["text"].dropna().astype(str))
 
     # Convert to lowercase and extract words
-    words = re.findall(r"\b[a-zA-Z]+\b", text.lower())
+    words = re.findall(r"\b[a-zA-Z]+\b", all_text.lower())
 
-    # Calculate word frequency
-    word_frequency = Counter(words)
+    # Calculate word frequencies
+    frequency = Counter(words)
 
-    print("\nTotal words:", len(words))
-    print("\nWord Frequency Distribution:")
-    print("-" * 35)
+    print("Total words:", len(words))
+    print("Unique words:", len(frequency))
+    print("\nWord Frequency Distribution")
+    print("---------------------------")
 
-    for word, count in sorted(word_frequency.items()):
+    for word, count in sorted(frequency.items()):
         print(f"{word}: {count}")
 
     print("\nResult: Word frequency distribution calculated successfully.")
-
 else:
     print("No file selected.")
